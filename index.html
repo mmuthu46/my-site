@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JE Corporate Engineering - Chennai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #F3ECE7 0%, #F3ECE7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #2c3e50);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo { float:left; height: 100px; width:auto; margin-left:0px; margin-right:-100px }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 50px;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .welcome-section h2 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .welcome-section p {
+            color: #5a6c7d;
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .app-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: #3498db;
+        }
+
+        .app-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .app-card h3 {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .app-card p {
+            color: #5a6c7d;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .app-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .app-button:hover {
+            background: linear-gradient(135deg, #2980b9, #21618c);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .features-list {
+            list-style: none;
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            color: #5a6c7d;
+            font-size: 13px;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer p {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        /* Password Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 40px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal h3 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .modal p {
+            color: #5a6c7d;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background: linear-gradient(135deg, #2980b9, #21618c);
+            transform: translateY(-2px);
+        }
+
+        .modal-btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .protected-icon {
+            color: #f39c12;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding: 30px 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+
+            .modal-content {
+                margin: 25% auto;
+                padding: 30px 20px;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://jecorporateenggchennai.z7.web.core.windows.net/JELOGO.png" alt="JE Company Logo" class="logo" />
+            <h1>Corporate Engineering - Chennai</h1>
+            <p>Digital Solutions Hub</p>
+        </div>
+
+        <div class="main-content">
+            <div class="welcome-section">
+                <h2>Welcome to Our Applications Portal</h2>
+                <p>Access our suite of corporate engineering tools designed to streamline feedback collection and project tracking. Choose from the applications below to get started.</p>
+            </div>
+
+            <div class="applications-grid">
+                <div class="app-card" onclick="window.location.href='feedback.html'">
+                    <div class="app-icon">📝</div>
+                    <h3>Customer Feedback Questionnaire</h3>
+                    <p>Collect and analyze customer feedback for continuous service improvement.</p>
+                    <ul class="features-list">
+                        <li>5-point rating system</li>
+                        <li>Work order tracking</li>
+                        <li>Business & engineering remarks</li>
+                        <li>Automated submission</li>
+                    </ul>
+                    <a href="feedback.html" class="app-button">Access Feedback Form</a>
+                </div>
+
+                <div class="app-card" onclick="showPasswordModal()">
+                    <div class="app-icon">📊</div>
+                    <h3>Task Tracker Dashboard <span class="protected-icon">🔒</span></h3>
+                    <p>Analyze project hours and track team performance across multiple Excel files.</p>
+                    <ul class="features-list">
+                        <li>Excel file upload & analysis</li>
+                        <li>Monthly & cumulative views</li>
+                        <li>Project hours summaries</li>
+                        <li>Interactive filtering</li>
+                    </ul>
+                    <span class="app-button" style="pointer-events: none;">Open Dashboard (Protected)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 JE Corporate Engineering Chennai. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h3>🔐 Access Required</h3>
+            <p>Please enter the password to access the Task Tracker Dashboard</p>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Enter Password" maxlength="10">
+            <div class="error-message" id="errorMessage">Incorrect password. Please try again.</div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" onclick="checkPassword()">Access Dashboard</button>
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Password protection functionality
+        function showPasswordModal() {
+            document.getElementById('passwordModal').style.display = 'block';
+            document.getElementById('passwordInput').focus();
+        }
+
+        function closeModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function checkPassword() {
+            const enteredPassword = document.getElementById('passwordInput').value;
+            const correctPassword = '2025';
+
+            if (enteredPassword === correctPassword) {
+                // Password is correct, redirect to tracker page
+                window.location.href = 'tracker.html';
+            } else {
+                // Show error message
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+
+        // Allow Enter key to submit password
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('passwordModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Add smooth scrolling and enhance user experience
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation when clicking feedback card
+            const feedbackCard = document.querySelector('.app-card:first-child');
+            if (feedbackCard) {
+                feedbackCard.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'A') {
+                        const button = this.querySelector('.app-button');
+                        button.textContent = 'Loading...';
+                        button.style.background = '#95a5a6';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
